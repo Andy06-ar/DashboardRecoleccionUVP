@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campaña Arroz y Frijol — UVP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <!-- Encabezado principal -->
+  <header class="site-header">
+    <div class="site-header__text">
+      <h1 class="site-header__title">Campaña Arroz y Frijol</h1>
+      <p class="site-header__subtitle">Sistema de Recolección de Alimentos</p>
+    </div>
+    <div class="site-header__brand" aria-label="Universidad">
+      <span class="site-header__logo" aria-hidden="true"></span>
+      <span class="site-header__logo-text">UVP</span>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- Tarjetas de totales (Arroz, Frijol, Total combinado) -->
+    <section class="totals" aria-label="Resumen de kilogramos recolectados">
+      <article class="card card--stat">
+        <div class="card__stat-head">
+          <span class="card__label">Arroz (kg)</span>
+          <span class="card__icon card__icon--bag" aria-hidden="true"></span>
+        </div>
+        <p class="card__value">1 240</p>
+        <!-- Placeholder de gráfica (línea semanal Lun–Dom) -->
+        <div class="chart-placeholder chart-placeholder--line" role="presentation">
+          <span class="chart-placeholder__range">Lun</span>
+          <div class="chart-placeholder__graphic">
+            <svg class="sparkline" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <polyline fill="none" stroke="currentColor" stroke-width="2" points="0,28 24,22 48,26 72,14 96,18 120,10" />
+            </svg>
+          </div>
+          <span class="chart-placeholder__range">Dom</span>
+        </div>
+      </article>
+
+      <article class="card card--stat">
+        <div class="card__stat-head">
+          <span class="card__label">Frijol (kg)</span>
+          <span class="card__icon card__icon--sprout" aria-hidden="true"></span>
+        </div>
+        <p class="card__value">980</p>
+        <div class="chart-placeholder chart-placeholder--line" role="presentation">
+          <span class="chart-placeholder__range">Lun</span>
+          <div class="chart-placeholder__graphic">
+            <svg class="sparkline" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <polyline fill="none" stroke="currentColor" stroke-width="2" points="0,22 24,26 48,18 72,24 96,14 120,20" />
+            </svg>
+          </div>
+          <span class="chart-placeholder__range">Dom</span>
+        </div>
+      </article>
+
+      <article class="card card--stat card--stat-accent">
+        <div class="card__stat-head">
+          <span class="card__label">Total combinado</span>
+          <span class="card__icon card__icon--scale" aria-hidden="true"></span>
+        </div>
+        <p class="card__value card__value--accent">2 220</p>
+        <div class="chart-placeholder chart-placeholder--bars" role="presentation">
+          <span class="chart-placeholder__range">Lun</span>
+          <div class="chart-placeholder__graphic bars-mock" aria-hidden="true">
+            <span class="bars-mock__bar bars-mock__bar--h1"></span>
+            <span class="bars-mock__bar bars-mock__bar--h2"></span>
+            <span class="bars-mock__bar bars-mock__bar--h3"></span>
+            <span class="bars-mock__bar bars-mock__bar--h4"></span>
+            <span class="bars-mock__bar bars-mock__bar--h5"></span>
+            <span class="bars-mock__bar bars-mock__bar--h6"></span>
+            <span class="bars-mock__bar bars-mock__bar--h7"></span>
+          </div>
+          <span class="chart-placeholder__range">Dom</span>
+        </div>
+      </article>
+    </section>
+
+    <!-- Detalle por carrera: controles + tabla -->
+    <section class="detail-panel card" aria-labelledby="detail-heading">
+      <div class="detail-toolbar">
+        <h2 id="detail-heading" class="detail-heading">Detalle por Carrera Académica</h2>
+        <div class="detail-controls">
+          <label class="visually-hidden" for="search-career">Buscar carrera</label>
+          <div class="search-wrap">
+            <span class="search-wrap__icon" aria-hidden="true">🔍</span>
+            <input
+              id="search-career"
+              class="search-input"
+              type="search"
+              placeholder="Buscar carrera..."
+              autocomplete="off"
+            />
+          </div>
+          <label class="visually-hidden" for="sort-select">Ordenar resultados</label>
+          <select id="sort-select" class="select-sort">
+            <option selected>Mayor Total (Desc)</option>
+            <option>Menor Total (Asc)</option>
+            <option>Alfabético (A-Z)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th scope="col">Carrera académica</th>
+              <th scope="col">Arroz (kg)</th>
+              <th scope="col">Frijol (kg)</th>
+              <th scope="col" class="data-table__total-col">Total (kg)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row" class="data-table__career">
+                <span class="career-icon career-icon--med" aria-hidden="true"></span>
+                Medicina
+              </th>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--100"></span></span>
+                  <span class="cell-value">450</span>
+                </div>
+              </td>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--69"></span></span>
+                  <span class="cell-value">310</span>
+                </div>
+              </td>
+              <td class="data-table__num data-table__total">760</td>
+            </tr>
+            <tr>
+              <th scope="row" class="data-table__career">
+                <span class="career-icon career-icon--sys" aria-hidden="true"></span>
+                Ingeniería en Sistemas
+              </th>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--67"></span></span>
+                  <span class="cell-value">300</span>
+                </div>
+              </td>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--77"></span></span>
+                  <span class="cell-value">240</span>
+                </div>
+              </td>
+              <td class="data-table__num data-table__total">540</td>
+            </tr>
+            <tr>
+              <th scope="row" class="data-table__career">
+                <span class="career-icon career-icon--law" aria-hidden="true"></span>
+                Derecho
+              </th>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--62"></span></span>
+                  <span class="cell-value">280</span>
+                </div>
+              </td>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--65"></span></span>
+                  <span class="cell-value">200</span>
+                </div>
+              </td>
+              <td class="data-table__num data-table__total">480</td>
+            </tr>
+            <tr>
+              <th scope="row" class="data-table__career">
+                <span class="career-icon career-icon--arch" aria-hidden="true"></span>
+                Arquitectura
+              </th>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--49"></span></span>
+                  <span class="cell-value">220</span>
+                </div>
+              </td>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--48"></span></span>
+                  <span class="cell-value">150</span>
+                </div>
+              </td>
+              <td class="data-table__num data-table__total">370</td>
+            </tr>
+            <tr>
+              <th scope="row" class="data-table__career">
+                <span class="career-icon career-icon--adm" aria-hidden="true"></span>
+                Administración
+              </th>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--42"></span></span>
+                  <span class="cell-value">190</span>
+                </div>
+              </td>
+              <td class="data-table__num">
+                <div class="cell-bar-wrap">
+                  <span class="bar-track"><span class="bar-fill bar-fill--39"></span></span>
+                  <span class="cell-value">120</span>
+                </div>
+              </td>
+              <td class="data-table__num data-table__total">310</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pie institucional -->
+  <footer class="site-footer">
+    <p>Universidad del Valle de Puebla</p>
+  </footer>
+</body>
+</html>
