@@ -1,0 +1,601 @@
+/* === Variables / base === */
+:root {
+  --color-primary: #e67e22;
+  --color-peach: #fff5eb;
+  --color-bg: #f8f9fa;
+  --text-dark: #333333;
+  --text-muted: #888888;
+  --white: #ffffff;
+  --shadow-card: 0 4px 14px rgb(0 0 0 / 0.06);
+  --radius: 12px;
+  --font: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  color: var(--text-dark);
+  background-color: var(--color-bg);
+  line-height: 1.45;
+}
+
+/* Accesibilidad: etiquetas ocultas visualmente */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* === Encabezado === */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
+  background-color: var(--white);
+  box-shadow: 0 1px 0 rgb(0 0 0 / 0.05);
+}
+
+.site-header__title {
+  margin: 0;
+  font-size: clamp(1.35rem, 2.5vw, 1.65rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+}
+
+.site-header__subtitle {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.site-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+/* Logo tipo hoja/(mockup) */
+.site-header__logo {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: linear-gradient(135deg, #f39c12 0%, var(--color-primary) 100%);
+  box-shadow: 0 2px 6px rgb(230 126 34 / 0.35);
+}
+
+.site-header__logo-text {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-dark);
+}
+
+/* === Contenedor principal === */
+.main-content {
+  flex: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* === Tarjetas de totales === */
+.totals {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+@media (max-width: 768px) {
+  .totals {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
+.card--stat {
+  padding: 1.1rem 1.25rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.card__stat-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.card__label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.card__value {
+  margin: 0;
+  font-size: clamp(1.75rem, 4vw, 2.1rem);
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1.15;
+}
+
+.card__value--accent {
+  color: var(--color-primary);
+}
+
+.card--stat-accent .card__label {
+  color: var(--text-muted);
+}
+
+/* Iconos circulares en tarjetas */
+.card__icon {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background-color: var(--color-peach);
+  border: 1px solid rgb(230 126 34 / 0.2);
+  position: relative;
+}
+
+.card__icon--bag::after {
+  content: "";
+  position: absolute;
+  inset: 0.35rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 4px 4px 6px 6px;
+  border-top-width: 3px;
+}
+
+.card__icon--sprout::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.38rem;
+  width: 2px;
+  height: 0.65rem;
+  background: var(--color-primary);
+  transform: translateX(-50%);
+  border-radius: 1px;
+  box-shadow: -5px -4px 0 -1px var(--color-primary), 5px -4px 0 -1px var(--color-primary);
+}
+
+.card__icon--scale::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0.95rem;
+  height: 0.95rem;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -52%);
+}
+
+/* Placeholder gráficas Lun–Dom */
+.chart-placeholder {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.35rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgb(0 0 0 / 0.05);
+}
+
+.chart-placeholder__range {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.chart-placeholder__graphic {
+  min-height: 2.25rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.sparkline {
+  width: 100%;
+  height: 2rem;
+  color: var(--color-primary);
+}
+
+/* Barras horizontales del total combinado */
+.bars-mock {
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 4px;
+  width: 100%;
+  padding: 0 0.15rem;
+  height: 2.25rem;
+}
+
+.bars-mock__bar {
+  flex: 1;
+  min-width: 4px;
+  max-width: 14px;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(180deg, var(--color-primary), #f5a962);
+}
+
+.bars-mock__bar--h1 {
+  height: 45%;
+}
+.bars-mock__bar--h2 {
+  height: 70%;
+}
+.bars-mock__bar--h3 {
+  height: 55%;
+}
+.bars-mock__bar--h4 {
+  height: 85%;
+}
+.bars-mock__bar--h5 {
+  height: 60%;
+}
+.bars-mock__bar--h6 {
+  height: 92%;
+}
+.bars-mock__bar--h7 {
+  height: 75%;
+}
+
+/* === Panel detalle por carrera === */
+.detail-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.detail-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem clamp(1rem, 2.5vw, 1.5rem);
+  border-bottom: 1px solid rgb(0 0 0 / 0.06);
+}
+
+.detail-heading {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.detail-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+}
+
+/* Búsqueda */
+.search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.75rem;
+  background: var(--color-bg);
+  border-radius: 999px;
+  border: 1px solid rgb(0 0 0 / 0.08);
+  min-width: min(100%, 220px);
+}
+
+.search-wrap__icon {
+  font-size: 0.85rem;
+  opacity: 0.65;
+  line-height: 1;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  min-width: 0;
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+/* Ordenamiento */
+.select-sort {
+  padding: 0.5rem 2rem 0.5rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgb(0 0 0 / 0.1);
+  background-color: var(--white);
+  font: inherit;
+  font-size: 0.88rem;
+  color: var(--text-dark);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23888' d='M3 4.5L6 8l3-3.5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.65rem center;
+}
+
+.select-sort:focus {
+  outline: 2px solid rgb(230 126 34 / 0.35);
+  outline-offset: 1px;
+}
+
+/* Tabla: contenedor scroll en pantallas angostas */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.data-table thead th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: rgb(248 249 250 / 0.8);
+  border-bottom: 1px solid rgb(0 0 0 / 0.06);
+  white-space: nowrap;
+}
+
+.data-table tbody th,
+.data-table tbody td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgb(0 0 0 / 0.06);
+  vertical-align: middle;
+}
+
+.data-table__total-col {
+  background-color: var(--color-peach);
+}
+
+.data-table thead .data-table__total-col {
+  background-color: rgb(255 237 217);
+}
+
+.data-table tbody tr:last-child th,
+.data-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table tbody tr {
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Hover en filas: resaltado solo al pasar el cursor (sin estado fijo en ninguna fila) */
+.data-table tbody tr:hover {
+  background-color: rgb(0 0 0 / 0.045);
+  box-shadow: inset 3px 0 0 var(--color-primary);
+}
+
+.data-table__career {
+  text-align: left;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 200px;
+}
+
+/* Íconos de carrera (decorativos) */
+.career-icon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.career-icon--med {
+  background: #ffe8ec;
+}
+
+.career-icon--med::before {
+  content: "⚕";
+  font-size: 0.95rem;
+}
+
+.career-icon--sys {
+  background: #e8f2ff;
+}
+
+.career-icon--sys::before {
+  content: "💻";
+}
+
+.career-icon--law {
+  background: #f2ecff;
+}
+
+.career-icon--law::before {
+  content: "⚖";
+}
+
+.career-icon--arch {
+  background: #fff3e0;
+}
+
+.career-icon--arch::before {
+  content: "📐";
+}
+
+.career-icon--adm {
+  background: #e8f7ef;
+}
+
+.career-icon--adm::before {
+  content: "📊";
+}
+
+.data-table__num {
+  text-align: right;
+}
+
+.cell-bar-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  min-width: 5.5rem;
+}
+
+.cell-value {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.bar-track {
+  display: block;
+  width: 100%;
+  max-width: 120px;
+  height: 5px;
+  border-radius: 999px;
+  background: rgb(230 126 34 / 0.12);
+  overflow: hidden;
+}
+
+.bar-fill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--color-primary), #f5a962);
+}
+
+/* Anchos relativos mock */
+.bar-fill--39 {
+  width: 39%;
+}
+.bar-fill--42 {
+  width: 42%;
+}
+.bar-fill--48 {
+  width: 48%;
+}
+.bar-fill--49 {
+  width: 49%;
+}
+.bar-fill--62 {
+  width: 62%;
+}
+.bar-fill--65 {
+  width: 65%;
+}
+.bar-fill--67 {
+  width: 67%;
+}
+.bar-fill--69 {
+  width: 69%;
+}
+.bar-fill--77 {
+  width: 77%;
+}
+.bar-fill--100 {
+  width: 100%;
+}
+
+.data-table__total {
+  font-weight: 700;
+  background-color: var(--color-peach);
+  color: var(--text-dark);
+  font-variant-numeric: tabular-nums;
+}
+
+/* === Footer institucional === */
+.site-footer {
+  margin-top: auto;
+  padding: 1.25rem clamp(1rem, 4vw, 2.5rem);
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgb(0 0 0 / 0.06);
+  background-color: var(--white);
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* Ajuste tabla muy estrecha: apilar barras debajo del número */
+@media (max-width: 520px) {
+  .detail-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .detail-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-wrap,
+  .select-sort {
+    width: 100%;
+  }
+
+  .cell-bar-wrap {
+    align-items: flex-start;
+    min-width: 0;
+    width: 100%;
+    max-width: 160px;
+  }
+
+  .bar-track {
+    max-width: none;
+  }
+}
