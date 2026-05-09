@@ -1,0 +1,71 @@
+{
+  "titulo": "Recolección por carrera",
+  "items": [
+    {
+      "slug": "ingenieria-sistemas",
+      "nombre": "Ingeniería en Sistemas",
+      "emoji": "💻",
+      "tema": "violet",
+      "lema": "Código y compasión",
+      "kg": 112400,
+      "metaKg": 124000,
+      "viajes": 468,
+      "cumplimientoPct": 91
+    },
+    {
+      "slug": "medicina",
+      "nombre": "Medicina",
+      "emoji": "🩺",
+      "tema": "coral",
+      "lema": "Manos que cuidan",
+      "kg": 98000,
+      "metaKg": 120000,
+      "viajes": 410,
+      "cumplimientoPct": 82
+    },
+    {
+      "slug": "arquitectura",
+      "nombre": "Arquitectura",
+      "emoji": "📐",
+      "tema": "sun",
+      "lema": "Diseñando impacto",
+      "kg": 87420,
+      "metaKg": 115000,
+      "viajes": 355,
+      "cumplimientoPct": 76
+    },
+    {
+      "slug": "psicologia",
+      "nombre": "Psicología",
+      "emoji": "🧠",
+      "tema": "ocean",
+      "lema": "Empatía en acción",
+      "kg": 76300,
+      "metaKg": 87000,
+      "viajes": 302,
+      "cumplimientoPct": 88
+    },
+    {
+      "slug": "nutricion",
+      "nombre": "Nutrición",
+      "emoji": "🥗",
+      "tema": "mint",
+      "lema": "Salud para todos",
+      "kg": 78060,
+      "metaKg": 99000,
+      "viajes": 307,
+      "cumplimientoPct": 79
+    },
+    {
+      "slug": "comunicacion",
+      "nombre": "Comunicación",
+      "emoji": "📣",
+      "tema": "rose",
+      "lema": "Historias que inspiran",
+      "kg": 65400,
+      "metaKg": 77000,
+      "viajes": 268,
+      "cumplimientoPct": 85
+    }
+  ]
+}

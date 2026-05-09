@@ -1,0 +1,32 @@
+{
+  "titulo": "Campus UVP en movimiento",
+  "actualizado": "2026-05-02",
+  "metaUniversidadKg": 650000,
+  "metaUniversidadEtiqueta": "Meta total del campus",
+  "kpis": [
+    {
+      "id": "kg_total",
+      "etiqueta": "Kilogramos recogidos (todas las carreras)",
+      "valor": 517580,
+      "sufijo": " kg"
+    },
+    {
+      "id": "viajes",
+      "etiqueta": "Brigadas y salidas solidarias",
+      "valor": 1842
+    },
+    {
+      "id": "rutas_activas",
+      "etiqueta": "Carreras participando",
+      "valor": 6
+    },
+    {
+      "id": "variacion_mes",
+      "etiqueta": "Entusiasmo vs. mes anterior",
+      "valor": 8.3,
+      "sufijo": "%",
+      "esVariacion": true,
+      "direccion": "up"
+    }
+  ]
+}
