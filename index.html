@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dashboard de recolección UVP — carreras universitarias y solidaridad en campus"
+    />
+    <title>Recolección UVP · Carreras en acción</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div class="dashboard-layout">
+      <div class="ambient" aria-hidden="true">
+        <div class="ambient__orb ambient__orb--1"></div>
+        <div class="ambient__orb ambient__orb--2"></div>
+        <div class="ambient__orb ambient__orb--3"></div>
+        <div class="ambient__grid"></div>
+      </div>
+
+      <header class="site-header">
+        <div class="site-header__inner">
+          <div class="site-header__brand">
+            <span class="site-header__mark" aria-hidden="true">
+              <span class="site-header__spark"></span>
+            </span>
+            <div>
+              <p class="site-header__eyebrow">UVP · Solidaridad universitaria</p>
+              <h1 class="site-header__title">Recolección en campus</h1>
+            </div>
+          </div>
+          <p class="site-header__meta" id="header-updated" data-updated></p>
+        </div>
+      </header>
+
+      <main id="main" class="site-main">
+        <div id="app" class="app-root" aria-live="polite" aria-busy="false"></div>
+      </main>
+
+      <footer class="site-footer">
+        <p class="site-footer__text">
+          Cada carrera suma kilos y sonrisas. Datos de ejemplo — conecta tu fuente real cuando esté lista.
+        </p>
+      </footer>
+    </div>
+    <script type="module" src="assets/js/app.js"></script>
+  </body>
+</html>
