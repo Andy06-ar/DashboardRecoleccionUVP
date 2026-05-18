@@ -85,9 +85,9 @@ function renderProgressRing(gradId, pctDisplay, extraClass = "") {
       <svg class="progress-ring__svg" viewBox="0 0 200 200" width="200" height="200">
         <defs>
           <linearGradient id="${gradId}" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#6366f1" />
-            <stop offset="45%" stop-color="#ec4899" />
-            <stop offset="100%" stop-color="#f97316" />
+            <stop offset="0%" stop-color="#7b2cbf" />
+            <stop offset="50%" stop-color="#ef476f" />
+            <stop offset="100%" stop-color="#ff8c00" />
           </linearGradient>
         </defs>
         <circle class="progress-ring__track" cx="100" cy="100" r="${r}" />
@@ -106,6 +106,130 @@ function renderProgressRing(gradId, pctDisplay, extraClass = "") {
       </svg>
       <div class="progress-ring__shine" aria-hidden="true"></div>
     </div>
+  `;
+}
+
+/**
+ * @param {Record<string, unknown>} row
+ * @returns {number | null}
+ */
+function careerPctValue(row) {
+  const kg = typeof row.kg === "number" ? row.kg : null;
+  const metaKg = typeof row.metaKg === "number" ? row.metaKg : null;
+  const pctKnown =
+    typeof row.cumplimientoPct === "number" ? row.cumplimientoPct : null;
+  if (kg !== null && metaKg !== null && metaKg > 0) {
+    return pctTowardMeta(kg, metaKg);
+  }
+  if (typeof pctKnown === "number") {
+    return Math.min(100, Math.max(0, pctKnown));
+  }
+  return null;
+}
+
+/**
+ * @param {{
+ *   kg: number;
+ *   meta: number;
+ *   pct: number;
+ *   etiquetaMeta: string;
+ *   gradId: string;
+ * }} opts
+ */
+function renderCampusProgressCard(opts) {
+  const faltan = Math.max(0, opts.meta - opts.kg);
+  const pct = Math.min(100, Math.max(0, opts.pct));
+  const gradId = opts.gradId;
+  return `
+    <section id="progreso" class="dashboard-section campus-progress" aria-labelledby="${gradId}-title">
+      <article class="panel-card campus-progress__card">
+        <header class="campus-progress__head">
+          <h2 id="${gradId}-title" class="campus-progress__title">Progreso de la universidad</h2>
+          <p class="campus-progress__subtitle">(suma de todas las carreras)</p>
+        </header>
+        <p class="campus-progress__motivation">Todos los kilos sumados frente a la meta total del campus. ¡Sigue subiendo la barra!</p>
+        <div class="campus-progress__body">
+          <div class="campus-progress__chart">
+            ${renderProgressRing(gradId, pct, "progress-ring--campus")}
+            <div class="campus-progress__ring-center" aria-hidden="true">
+              <span class="campus-progress__ring-kg" data-count-up="${opts.kg}">${formatNumber(opts.kg)} kg</span>
+            </div>
+          </div>
+          <div class="campus-progress__aside">
+            <div class="campus-progress__stat-box">
+              <span class="campus-progress__stat-label">${escapeHtml(opts.etiquetaMeta)}</span>
+              <span class="campus-progress__stat-value">${formatNumber(opts.meta)} kg</span>
+            </div>
+            <div class="campus-progress__stat-box campus-progress__stat-box--warn">
+              <span class="campus-progress__stat-label">Faltan</span>
+              <span class="campus-progress__stat-value">${formatNumber(faltan)} kg</span>
+            </div>
+            <div class="campus-progress__bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pct)}" aria-label="Progreso ${pct1(pct)} por ciento">
+              <div class="campus-progress__bar-fill" data-bar-fill style="--target-width: ${pct}%"></div>
+            </div>
+            <p class="campus-progress__pct" aria-label="Porcentaje de avance">${pct1(pct)}%</p>
+          </div>
+        </div>
+      </article>
+    </section>
+  `;
+}
+
+/**
+ * @param {Record<string, unknown>} row
+ */
+function renderFeaturedCareer(row) {
+  const nombre = typeof row.nombre === "string" ? row.nombre : "—";
+  const slug = typeof row.slug === "string" ? row.slug : "";
+  const emoji = typeof row.emoji === "string" ? row.emoji : "🎓";
+  const pct = careerPctValue(row);
+  const pctClamped = pct !== null ? Math.min(100, Math.max(0, pct)) : 0;
+  const href = slug ? careerHash(slug) : "#";
+  const pctLabel = pct !== null ? `${pct1(pct)}%` : "—";
+
+  return `
+    <li class="featured-career">
+      <div class="featured-career__head">
+        <span class="featured-career__emoji" aria-hidden="true">${escapeHtml(emoji)}</span>
+        <span class="featured-career__name">${escapeHtml(nombre)}</span>
+        <span class="featured-career__pct">${pctLabel}</span>
+      </div>
+      <div class="featured-career__meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${Math.round(pctClamped)}" aria-label="Avance ${pctLabel}">
+        <div class="featured-career__meter-fill" data-bar-fill style="--target-width: ${pctClamped}%"></div>
+      </div>
+      ${slug ? `<a class="btn-ghost btn-ghost--sm" href="${href}">Ver detalle</a>` : ""}
+    </li>
+  `;
+}
+
+/**
+ * @param {number | null} brigadas
+ * @param {number} carrerasCount
+ */
+function renderCommunityBlock(brigadas, carrerasCount) {
+  const brigadasTxt =
+    brigadas !== null ? formatNumber(brigadas) : "—";
+  return `
+    <section id="comunidad" class="dashboard-section community-block" aria-labelledby="community-heading">
+      <div class="section-intro section-intro--inline">
+        <h2 id="community-heading" class="section-heading">Brigadas y comunidad</h2>
+        <p class="section-intro__sub section-intro__sub--inline">Salidas solidarias que conectan al campus con quien más lo necesita.</p>
+      </div>
+      <article class="panel-card community-block__card">
+        <div class="community-block__layout">
+          <div class="community-block__metric">
+            <span class="community-block__icon" aria-hidden="true">🚚</span>
+            <p class="community-block__label">Brigadas y salidas solidarias</p>
+            <p class="community-block__value community-block__value--pulse" data-count-up="${brigadas ?? 0}" data-count-suffix="">${brigadasTxt}</p>
+          </div>
+          <div class="community-block__metric">
+            <span class="community-block__icon" aria-hidden="true">🎓</span>
+            <p class="community-block__label">Carreras en movimiento</p>
+            <p class="community-block__value">${formatNumber(carrerasCount)}</p>
+          </div>
+        </div>
+      </article>
+    </section>
   `;
 }
 
@@ -355,9 +479,19 @@ export function renderDashboard(root, vm) {
   const headerEl = document.getElementById("header-updated");
   setHeaderUpdated(headerEl, vm.conteo.actualizado);
 
-  const kpisHtml = vm.conteo.kpis.map(renderKpiCard).join("");
+  const quickKpis = vm.conteo.kpis.filter((k) => k && k.id !== "kg_total");
+  const kpisHtml = quickKpis.map(renderKpiCard).join("");
   const cardsHtml = vm.divisiones.items.map(renderCareerCard).join("");
   const rowsHtml = vm.divisiones.items.map(renderCareerRow).join("");
+
+  const viajesKpi = vm.conteo.kpis.find((k) => k && k.id === "viajes");
+  const brigadas =
+    viajesKpi && typeof viajesKpi.valor === "number" ? viajesKpi.valor : null;
+
+  const topCareers = [...vm.divisiones.items]
+    .sort((a, b) => (careerPctValue(b) ?? 0) - (careerPctValue(a) ?? 0))
+    .slice(0, 4);
+  const featuredHtml = topCareers.map(renderFeaturedCareer).join("");
 
   const kg = vm.totales.kgRecogidosCampus;
   const meta = vm.totales.metaUniversidadKg;
@@ -366,33 +500,38 @@ export function renderDashboard(root, vm) {
 
   const progressHtml =
     meta > 0
-      ? renderProgressHero({
+      ? renderCampusProgressCard({
           kg,
           meta,
           pct: pctCampus,
           etiquetaMeta: metaLabel,
           gradId: "gradCampus",
-          headline: "Progreso de la universidad",
-          subline:
-            "Todos los kilos sumados frente a la meta total del campus. ¡Sigue subiendo la barra!",
         })
       : "";
 
   root.innerHTML = `
-    <nav class="app-nav" aria-label="Secciones">
-      <span class="app-nav__current">Inicio</span>
-      <span class="app-nav__hint">Toca una carrera para ver su vista detallada</span>
-    </nav>
+    <div class="dashboard-top">
     ${progressHtml}
-    <section class="dashboard-section dashboard-section--hero" aria-labelledby="summary-heading">
-      <div class="section-intro">
-        <span class="section-intro__badge" aria-hidden="true">📚</span>
-        <h2 id="summary-heading" class="section-heading section-heading--gradient">${escapeHtml(vm.conteo.titulo)}</h2>
-        <p class="section-intro__sub">Kilogramos, brigadas y el brillo de cada facultad en un solo vistazo.</p>
-      </div>
-      <div class="kpi-grid">${kpisHtml}</div>
+      <section id="destacadas" class="dashboard-section featured-panel" aria-labelledby="featured-heading">
+        <article class="panel-card featured-panel__card">
+          <header class="featured-panel__head">
+            <div>
+              <h2 id="featured-heading" class="featured-panel__title">Destacadas — avance de carrera</h2>
+              <p class="featured-panel__sub">Las carreras que más impulso llevan este periodo.</p>
+            </div>
+            <span class="featured-panel__badge">Top ${topCareers.length}</span>
+          </header>
+          <ol class="featured-list">${featuredHtml}</ol>
+          <a class="btn-ghost btn-ghost--wide" href="#carreras">Ver detalle de todas las carreras</a>
+        </article>
+      </section>
+    </div>
+    <section id="indicadores" class="dashboard-section dashboard-section--indicators" aria-labelledby="indicators-heading">
+      <h2 id="indicators-heading" class="section-heading section-heading--sm">Indicadores rápidos</h2>
+      <div class="kpi-grid kpi-grid--quick">${kpisHtml}</div>
     </section>
-    <section class="dashboard-section" aria-labelledby="div-heading">
+    ${renderCommunityBlock(brigadas, vm.divisiones.items.length)}
+    <section id="carreras" class="dashboard-section dashboard-section--careers" aria-labelledby="div-heading">
       <div class="section-intro section-intro--inline">
         <h2 id="div-heading" class="section-heading section-heading--gradient section-heading--lg">${escapeHtml(vm.divisiones.titulo)}</h2>
         <p class="section-intro__sub section-intro__sub--inline">Cada carrera es un equipo con su propia personalidad.</p>
@@ -574,16 +713,18 @@ export function mountProgressAnimations(root) {
     if (!(el instanceof HTMLElement)) return;
     const target = parseInt(el.getAttribute("data-count-up") || "0", 10);
     if (reduce || Number.isNaN(target)) return;
+    const suffix = el.getAttribute("data-count-suffix");
+    const unit = suffix === null ? " kg" : suffix;
     const duration = 1400;
     const t0 = performance.now();
     const step = (now) => {
       const p = Math.min(1, (now - t0) / duration);
       const eased = 1 - (1 - p) ** 3;
       const val = Math.round(target * eased);
-      el.textContent = `${formatNumber(val)} kg`;
+      el.textContent = `${formatNumber(val)}${unit}`;
       if (p < 1) requestAnimationFrame(step);
     };
-    el.textContent = `${formatNumber(0)} kg`;
+    el.textContent = `${formatNumber(0)}${unit}`;
     requestAnimationFrame(step);
   });
 }
