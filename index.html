@@ -7,7 +7,7 @@
       name="description"
       content="Dashboard de recolección UVP — carreras universitarias y solidaridad en campus"
     />
-    <title>Recolección UVP · Carreras en acción</title>
+    <title>Solidaridad Universitaria – Recolección Campus · UVP</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +26,7 @@
         <div class="ambient__grid"></div>
       </div>
 
-      <header class="site-header">
+      <header class="site-header site-header--fixed">
         <div class="site-header__inner">
           <div class="site-header__brand">
             <span class="site-header__mark" aria-hidden="true">
@@ -34,18 +34,40 @@
             </span>
             <div>
               <p class="site-header__eyebrow">UVP · Solidaridad universitaria</p>
-              <h1 class="site-header__title">Recolección en campus</h1>
+              <h1 class="site-header__title">Solidaridad Universitaria – Recolección Campus</h1>
             </div>
           </div>
           <p class="site-header__meta" id="header-updated" data-updated></p>
         </div>
+        <nav class="site-nav" aria-label="Navegación por secciones">
+          <a class="site-nav__link" href="#progreso">Progreso</a>
+          <a class="site-nav__link" href="#indicadores">Indicadores</a>
+          <a class="site-nav__link" href="#destacadas">Destacadas</a>
+          <a class="site-nav__link" href="#comunidad">Comunidad</a>
+          <a class="site-nav__link" href="#carreras">Carreras</a>
+        </nav>
       </header>
 
-      <main id="main" class="site-main">
+      <main id="main" class="site-main site-main--offset">
         <div id="app" class="app-root" aria-live="polite" aria-busy="false"></div>
       </main>
 
-      <footer class="site-footer">
+      <footer class="site-footer site-footer--institutional">
+        <div class="site-footer__inner">
+          <div class="site-footer__brand">
+            <span class="site-footer__mark" aria-hidden="true"></span>
+            <div>
+              <p class="site-footer__eyebrow">Universidad del Valle de Puebla</p>
+              <p class="site-footer__name">Solidaridad Universitaria</p>
+            </div>
+          </div>
+          <nav class="site-footer__links" aria-label="Enlaces institucionales">
+            <a class="site-footer__link" href="https://www.uvp.mx" target="_blank" rel="noopener noreferrer">Sitio UVP</a>
+            <a class="site-footer__link" href="#progreso">Progreso campus</a>
+            <a class="site-footer__link" href="#carreras">Carreras</a>
+            <a class="site-footer__link" href="#comunidad">Comunidad</a>
+          </nav>
+        </div>
         <p class="site-footer__text">
           Cada carrera suma kilos y sonrisas. Datos de ejemplo — conecta tu fuente real cuando esté lista.
         </p>
