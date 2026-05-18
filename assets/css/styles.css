@@ -38,6 +38,8 @@
   --text-kpi: clamp(1.6rem, 1.3rem + 1.5vw, 2.35rem);
   --header-title: clamp(1.35rem, 1.15rem + 1vw, 1.75rem);
   --max-content: 1180px;
+  --header-offset: clamp(7.5rem, 6rem + 4vw, 10.5rem);
+  --gradient-brand: linear-gradient(135deg, #7b2cbf 0%, #ef476f 52%, #ff8c00 100%);
 
   /* Temas de tarjeta (carrera) */
   --c-violet-from: #7c3aed;
@@ -72,6 +74,11 @@
 
 html {
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: calc(var(--header-offset) + var(--space-4));
 }
 
 body {
@@ -192,15 +199,54 @@ body {
   }
 }
 
-/* —— Header —— */
+/* —— Header fijo y navegación —— */
 .site-header {
   position: relative;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
+}
+
+.site-header--fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.site-nav {
+  max-width: var(--max-content);
+  margin: 0 auto;
+  padding: 0 var(--space-4) var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+  border-top: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.site-nav__link {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+  padding: var(--space-1) 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-nav__link:hover,
+.site-nav__link:focus-visible {
+  color: #7b2cbf;
+  border-bottom-color: #ef476f;
+}
+
+.site-main--offset {
+  padding-top: var(--header-offset);
 }
 
 .site-header__inner {
@@ -1501,4 +1547,478 @@ body {
   color: var(--color-text-muted);
   text-align: center;
   font-weight: 600;
+}
+
+/* —— Footer institucional —— */
+.site-footer--institutional {
+  padding: var(--space-8) var(--space-4) var(--space-6);
+}
+
+.site-footer__inner {
+  max-width: var(--max-content);
+  margin: 0 auto var(--space-5);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+
+.site-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.site-footer__mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--gradient-brand);
+  box-shadow: 0 6px 18px rgba(123, 44, 191, 0.35);
+  flex-shrink: 0;
+}
+
+.site-footer__eyebrow {
+  margin: 0;
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.site-footer__name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-base);
+  color: var(--color-text);
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-5);
+}
+
+.site-footer__link {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+
+.site-footer__link:hover {
+  text-decoration: underline;
+}
+
+/* —— Tarjetas panel (vista principal) —— */
+.panel-card {
+  background: var(--color-surface-solid);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-6);
+}
+
+.dashboard-top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+  margin-bottom: var(--space-8);
+  align-items: stretch;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-top {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  }
+}
+
+.dashboard-top .campus-progress.dashboard-section {
+  margin-bottom: 0;
+}
+
+.dashboard-top .featured-panel.dashboard-section {
+  margin-bottom: 0;
+}
+
+/* —— Progreso global campus —— */
+.campus-progress__card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.campus-progress__head {
+  margin-bottom: var(--space-2);
+}
+
+.campus-progress__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+}
+
+.campus-progress__subtitle {
+  margin: var(--space-1) 0 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.campus-progress__motivation {
+  margin: 0 0 var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.campus-progress__body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  flex: 1;
+}
+
+@media (min-width: 720px) {
+  .campus-progress__body {
+    grid-template-columns: minmax(180px, 240px) 1fr;
+  }
+}
+
+.campus-progress__chart {
+  position: relative;
+  display: grid;
+  place-items: center;
+  justify-self: center;
+}
+
+.campus-progress__ring-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  padding: 18%;
+  text-align: center;
+}
+
+.campus-progress__ring-kg {
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 0.9rem + 1vw, 1.55rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.progress-ring--campus {
+  width: min(220px, 68vw);
+  height: min(220px, 68vw);
+}
+
+.campus-progress__stat-box {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--space-3);
+}
+
+.campus-progress__stat-box--warn .campus-progress__stat-value {
+  color: var(--color-accent-hot);
+}
+
+.campus-progress__stat-label {
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-muted);
+}
+
+.campus-progress__stat-value {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.campus-progress__bar {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.12);
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+
+.campus-progress__bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--gradient-brand);
+  background-size: 200% 100%;
+  animation: barShine 3s linear infinite;
+  box-shadow: 0 0 16px rgba(239, 71, 111, 0.35);
+}
+
+.campus-progress__pct {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.5rem + 2vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1;
+  background: linear-gradient(100deg, #7b2cbf, #ef476f);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* —— Carreras destacadas —— */
+.featured-panel__card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.featured-panel__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.featured-panel__title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.featured-panel__sub {
+  margin: var(--space-2) 0 0;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.featured-panel__badge {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-primary-dark);
+  padding: var(--space-1) var(--space-3);
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: rgba(99, 102, 241, 0.06);
+}
+
+.featured-list {
+  list-style: none;
+  margin: 0 0 var(--space-5);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+}
+
+.featured-career {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.featured-career__head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.featured-career__emoji {
+  font-size: 1.35rem;
+  line-height: 1;
+}
+
+.featured-career__name {
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-sm);
+  min-width: 0;
+}
+
+.featured-career__pct {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-primary-dark);
+}
+
+.featured-career__meter {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.12);
+  overflow: hidden;
+}
+
+.featured-career__meter-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: var(--gradient-brand);
+  min-width: 4px;
+}
+
+/* —— Indicadores rápidos (3 columnas) —— */
+.section-heading--sm {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-5);
+}
+
+.dashboard-section--indicators {
+  margin-bottom: var(--space-8);
+}
+
+.kpi-grid--quick {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 640px) {
+  .kpi-grid--quick {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* —— Comunidad y brigadas —— */
+.community-block__card {
+  padding: var(--space-8) var(--space-6);
+}
+
+.community-block__layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 640px) {
+  .community-block__layout {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.community-block__metric {
+  text-align: center;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.05), rgba(255, 255, 255, 0.5));
+  border: 1px solid var(--color-border);
+}
+
+.community-block__icon {
+  display: block;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: var(--space-3);
+}
+
+.community-block__label {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.community-block__value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--text-kpi);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+  background: linear-gradient(180deg, #1e1b4b 0%, #7b2cbf 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.community-block__value--pulse {
+  animation: communityPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes communityPop {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.dashboard-section--careers {
+  scroll-margin-top: calc(var(--header-offset) + var(--space-6));
+}
+
+/* —— Botones auxiliares —— */
+.btn-ghost--sm {
+  font-size: var(--text-xs);
+  padding: var(--space-2) var(--space-3);
+  align-self: flex-start;
+}
+
+.btn-ghost--wide {
+  width: 100%;
+  margin-top: auto;
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--text-sm);
+  text-align: center;
+}
+
+@media (max-width: 639px) {
+  .site-header__title {
+    font-size: clamp(1.1rem, 1rem + 0.8vw, 1.35rem);
+  }
+
+  .site-nav {
+    gap: var(--space-2) var(--space-3);
+  }
+
+  .site-nav__link {
+    font-size: var(--text-xs);
+  }
+
+  .site-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .campus-progress__bar-fill {
+    animation: none;
+  }
+  .community-block__value--pulse {
+    animation: none;
+  }
 }
